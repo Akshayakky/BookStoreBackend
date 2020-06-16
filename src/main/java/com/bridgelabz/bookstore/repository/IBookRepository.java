@@ -15,5 +15,5 @@ public interface IBookRepository extends JpaRepository<Book, Long> {
 
     List<Book> findByOrderByBookQuantity();
 
-    List<Book> findByBookAuthorOrBookTitleContains(String bookAuthor, String bookTitle);
+    List<Book> findBooksByBookAuthorContainsOrBookTitleContains(String bookAuthor, String bookTitle);
 }

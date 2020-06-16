@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class MyUserDetails implements UserDetails {
-    private String userName;
-    private String userPassword;
-    private boolean active;
-    private List<GrantedAuthority> authorities;
+    private final String userName;
+    private final String userPassword;
+    private final boolean active;
+    private final List<GrantedAuthority> authorities;
 
     public MyUserDetails(User user) {
         this.userName = user.getEmail();

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/customerController")
+@RequestMapping("/customer")
 @CrossOrigin(origins = "http://localhost:3000")
 
 public class CustomerController {
@@ -17,7 +17,6 @@ public class CustomerController {
     private ICustomerService customerService;
 
     /**
-     *
      * @param customerDto
      * @return Add customer details to the database
      */
@@ -27,7 +26,6 @@ public class CustomerController {
     }
 
     /**
-     *
      * @param customerId
      * @param customerDto
      * @return Update customer details of given customer id
@@ -39,7 +37,6 @@ public class CustomerController {
     }
 
     /**
-     *
      * @param customerId
      * @throws CustomerException
      */
@@ -49,11 +46,10 @@ public class CustomerController {
     }
 
     /**
-     *
      * @return Customer details of particular customer id
      */
-    @GetMapping("/{id}")
-    public Customer getCustomer(@PathVariable long id) {
-        return customerService.getCustomer(id);
+    @GetMapping("/{customerId}")
+    public Customer getCustomer(@PathVariable long customerId) {
+        return customerService.getCustomer(customerId);
     }
 }

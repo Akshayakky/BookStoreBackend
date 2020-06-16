@@ -18,7 +18,6 @@ public class UserServiceImpl implements IUserService {
     private ModelMapper modelMapper;
 
     /**
-     *
      * @param userDto
      * @return Register new user for authentication
      * @throws UserException

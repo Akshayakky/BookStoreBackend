@@ -2,7 +2,7 @@ package com.bridgelabz.bookstore.exception;
 
 public class BookStoreException extends Exception {
 
-   public ExceptionType type;
+    public ExceptionType type;
 
     public BookStoreException(ExceptionType Type, String message) {
         super(message);
@@ -10,6 +10,6 @@ public class BookStoreException extends Exception {
     }
 
     public enum ExceptionType {
-        BOOK_IS_NOT_AVAILABLE;
+        BOOK_IS_NOT_AVAILABLE
     }
 }

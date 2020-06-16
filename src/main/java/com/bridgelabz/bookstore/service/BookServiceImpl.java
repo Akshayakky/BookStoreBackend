@@ -39,7 +39,7 @@ public class BookServiceImpl implements IBookService {
      */
     @Override
     public List<Book> getBookByFilter(String filter) throws BookStoreException {
-        List<Book> bookList = bookRepository.findByBookAuthorOrBookTitleContains(filter, filter);
+        List<Book> bookList = bookRepository.findBooksByBookAuthorContainsOrBookTitleContains(filter, filter);
         if (bookList.isEmpty())
             throw new BookStoreException(BookStoreException.ExceptionType.BOOK_IS_NOT_AVAILABLE, "BOOK_IS_NOT_AVAILABLE");
         return bookList;

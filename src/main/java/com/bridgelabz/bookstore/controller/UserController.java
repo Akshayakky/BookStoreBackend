@@ -15,10 +15,9 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    IUserService userService;;
+    IUserService userService;
 
     /**
-     *
      * @param userDto
      * @return Register new user
      */

@@ -11,13 +11,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/book")
 @CrossOrigin(origins = "http://localhost:3000")
-public class OnlineBookController {
+public class BookController {
 
     @Autowired
     private IBookService bookService;
 
     /**
-     *
      * @return All books inside database with details
      */
     @GetMapping("/get-books")
@@ -26,17 +25,15 @@ public class OnlineBookController {
     }
 
     /**
-     *
-     * @param id
+     * @param ids
      * @return Book details according to book id
      */
     @GetMapping("/get-books-by-id")
-    public List<Book> getBookById(@RequestParam(value = "id") Long[] id) {
-        return bookService.getBookById(id);
+    public List<Book> getBookById(@RequestParam(value = "ids") Long[] ids) {
+        return bookService.getBookById(ids);
     }
 
-     /**
-     *
+    /**
      * @param filter
      * @return Book by filter search may be it will be author name or book title
      * @throws BookStoreException
@@ -47,7 +44,6 @@ public class OnlineBookController {
     }
 
     /**
-     *
      * @param sort
      * @return Book list by sorting price
      */

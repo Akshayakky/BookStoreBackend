@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomerServiceImpl implements ICustomerService{
+public class CustomerServiceImpl implements ICustomerService {
 
     @Autowired
     private ICustomerRepository customerRepository;
@@ -18,7 +18,6 @@ public class CustomerServiceImpl implements ICustomerService{
     private ModelMapper modelMapper;
 
     /**
-     *
      * @param customerDto
      * @return Add customer details to the database
      */
@@ -29,8 +28,6 @@ public class CustomerServiceImpl implements ICustomerService{
     }
 
     /**
-     *
-     *
      * @param customerId
      * @param customerDto
      * @return

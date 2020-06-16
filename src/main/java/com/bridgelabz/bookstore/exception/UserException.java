@@ -9,6 +9,6 @@ public class UserException extends Throwable {
     }
 
     public enum ExceptionType {
-        ALREADY_REGISTERED;
+        ALREADY_REGISTERED
     }
 }
