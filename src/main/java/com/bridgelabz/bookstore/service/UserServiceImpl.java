@@ -8,6 +8,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserServiceImpl implements IUserService {
 
@@ -27,6 +29,18 @@ public class UserServiceImpl implements IUserService {
         User user = modelMapper.map(userDto, User.class);
         if (userRepository.findByEmail(user.getEmail()).isPresent())
             throw new UserException(UserException.ExceptionType.ALREADY_REGISTERED, "Email Id Already Registered");
+        return userRepository.save(user);
+    }
+
+    @Override
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public User updateUser(UserDto userDto, Long id) {
+        User user = modelMapper.map(userDto, User.class);
+        user.setUserId(id);
         return userRepository.save(user);
     }
 }

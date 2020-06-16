@@ -17,7 +17,7 @@ public class User {
     private String lastName;
     private String email;
     private String password;
-    private String roles;
+    private String role;
 
     public boolean isActive() {
         return true;
@@ -67,11 +67,11 @@ public class User {
         this.password = password;
     }
 
-    public String getRoles() {
+    public String getRole() {
         return "user";
     }
 
-    public void setRoles(String roles) {
-        this.roles = roles;
+    public void setRole(String role) {
+        this.role = role;
     }
 }

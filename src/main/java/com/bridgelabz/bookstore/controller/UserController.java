@@ -30,4 +30,15 @@ public class UserController {
         }
         return new ResponseEntity<>("User Register Successfully", HttpStatus.CREATED);
     }
+
+    @GetMapping
+    public ResponseEntity<User> getUser(@RequestParam(value = "email") String email) {
+        return new ResponseEntity<>(userService.getUserByEmail(email).get(), HttpStatus.OK);
+    }
+
+    @PutMapping
+    public ResponseEntity<User> updateUser(@RequestBody UserDto userDto, @RequestParam(value = "id") Long id)
+            throws UserException {
+        return new ResponseEntity<>(userService.updateUser(userDto, id), HttpStatus.OK);
+    }
 }
