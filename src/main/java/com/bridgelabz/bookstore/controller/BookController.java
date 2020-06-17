@@ -1,9 +1,12 @@
 package com.bridgelabz.bookstore.controller;
 
+import com.bridgelabz.bookstore.dto.BookDto;
 import com.bridgelabz.bookstore.exception.BookStoreException;
 import com.bridgelabz.bookstore.model.Book;
 import com.bridgelabz.bookstore.service.IBookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,5 +53,11 @@ public class BookController {
     @GetMapping("/sorted/{sort}")
     public List<Book> getBookBySort(@PathVariable(value = "sort") String sort) {
         return bookService.getBookBySort(sort);
+    }
+
+    @PostMapping
+    public ResponseEntity<Book> addBook(@RequestBody BookDto bookDto) {
+        Book book = bookService.addBook(bookDto);
+        return new ResponseEntity<>(book, HttpStatus.ACCEPTED);
     }
 }

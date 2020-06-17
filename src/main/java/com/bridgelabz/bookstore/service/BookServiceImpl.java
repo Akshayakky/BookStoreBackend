@@ -1,9 +1,12 @@
 package com.bridgelabz.bookstore.service;
 
+import com.bridgelabz.bookstore.dto.BookDto;
 import com.bridgelabz.bookstore.exception.BookStoreException;
 import com.bridgelabz.bookstore.model.Book;
 import com.bridgelabz.bookstore.repository.IBookRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -14,6 +17,9 @@ public class BookServiceImpl implements IBookService {
 
     @Autowired
     private IBookRepository bookRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     /**
      * @return All book list with details
@@ -63,6 +69,12 @@ public class BookServiceImpl implements IBookService {
                 bookList = bookRepository.findByOrderByBookQuantity();
         }
         return bookList;
+    }
+
+    @Override
+    public Book addBook(BookDto bookDto) {
+        Book book = modelMapper.map(bookDto, Book.class);
+        return bookRepository.save(book);
     }
 }
 
