@@ -32,7 +32,7 @@ public class CustomerController {
      * @throws CustomerException
      */
     @PutMapping("/{customerId}")
-    public Customer updateCustomerDetails(@PathVariable long customerId, @RequestBody CustomerDto customerDto) {
+    public Customer updateCustomerDetails(@PathVariable Long customerId, @RequestBody CustomerDto customerDto) {
         return customerService.updateCustomer(customerId, customerDto);
     }
 
@@ -40,16 +40,16 @@ public class CustomerController {
      * @param customerId
      * @throws CustomerException
      */
-    @DeleteMapping("/{customerId}")
-    public void removeCustomer(@PathVariable long customerId) throws CustomerException {
+    @DeleteMapping("/{customer-id}")
+    public void removeCustomer(@PathVariable(value = "customer-id") Long customerId) throws CustomerException {
         customerService.removeCustomer(customerId);
     }
 
     /**
      * @return Customer details of particular customer id
      */
-    @GetMapping("/{customerId}")
-    public Customer getCustomer(@PathVariable long customerId) {
+    @GetMapping("/{customer-id}")
+    public Customer getCustomer(@PathVariable(value = "customer-id") Long customerId) {
         return customerService.getCustomer(customerId);
     }
 }

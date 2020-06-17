@@ -33,21 +33,21 @@ public class CustomerServiceImpl implements ICustomerService {
      * @return
      */
     @Override
-    public Customer updateCustomer(long customerId, CustomerDto customerDto) {
+    public Customer updateCustomer(Long customerId, CustomerDto customerDto) {
         Customer customer = modelMapper.map(customerDto, Customer.class);
         customer.setId(customerId);
         return customerRepository.save(customer);
     }
 
     @Override
-    public void removeCustomer(long customerId) throws CustomerException {
+    public void removeCustomer(Long customerId) throws CustomerException {
         if (customerRepository.findById(customerId).isPresent())
             customerRepository.deleteById(customerId);
         else throw new CustomerException(CustomerException.ExceptionType.CUSTOMER_NOT_FOUND, "CUSTOMER_NOT_FOUND");
     }
 
     @Override
-    public Customer getCustomer(long customerId) {
+    public Customer getCustomer(Long customerId) {
         return customerRepository.findById(customerId).get();
     }
 }

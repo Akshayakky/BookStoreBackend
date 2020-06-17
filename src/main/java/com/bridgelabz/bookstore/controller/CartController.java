@@ -34,7 +34,7 @@ public class CartController {
      * @throws CartException
      */
     @PutMapping("/{quantity}")
-    public Cart updateCart(@RequestParam(value = "book_id") long bookId, @PathVariable long quantity) throws CartException {
+    public Cart updateCart(@RequestParam(value = "book_id") Long bookId, @PathVariable Long quantity) throws CartException {
         return cartService.updateCart(bookId, quantity);
     }
 
@@ -42,8 +42,8 @@ public class CartController {
      * @param bookId
      * @throws CartException
      */
-    @DeleteMapping("/deleteBook/{bookId}")
-    public void removeBookFromCart(@PathVariable int bookId) throws CartException {
+    @DeleteMapping("/delete-book/{book-id}")
+    public void removeBookFromCart(@PathVariable(value = "book-id") Long bookId) throws CartException {
         cartService.removeBookFromCart(bookId);
     }
 

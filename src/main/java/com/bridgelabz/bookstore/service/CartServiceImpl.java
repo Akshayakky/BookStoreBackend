@@ -44,7 +44,7 @@ public class CartServiceImpl implements ICartService {
      * @throws CartException
      */
     @Override
-    public Cart updateCart(long bookId, long bookQuantity) throws CartException {
+    public Cart updateCart(Long bookId, Long bookQuantity) throws CartException {
         Cart cart = cartRepository.findById(bookId).get();
         if (cart == null)
             throw new CartException(CartException.ExceptionType.BOOK_IS_NOT_AVAILABLE, "BOOK_IS_NOT_AVAILABLE");
@@ -57,10 +57,10 @@ public class CartServiceImpl implements ICartService {
      * @throws CartException
      */
     @Override
-    public void removeBookFromCart(long bookId) throws CartException {
-        if (cartRepository.findById(bookId).isPresent())
-            cartRepository.deleteById(bookId);
-        throw new CartException(CartException.ExceptionType.INVALID_BOOK_ID, "INVALID_BOOK_ID");
+    public void removeBookFromCart(Long bookId) throws CartException {
+        if (!cartRepository.findById(bookId).isPresent())
+            throw new CartException(CartException.ExceptionType.INVALID_BOOK_ID, "INVALID_BOOK_ID");
+        cartRepository.deleteById(bookId);
     }
 
     /**

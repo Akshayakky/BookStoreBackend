@@ -7,9 +7,9 @@ import com.bridgelabz.bookstore.model.Customer;
 public interface ICustomerService {
     Customer addCustomer(CustomerDto customerDto);
 
-    Customer updateCustomer(long customerId, CustomerDto orderQuantity);
+    Customer updateCustomer(Long customerId, CustomerDto orderQuantity);
 
-    void removeCustomer(long customerId) throws CustomerException;
+    void removeCustomer(Long customerId) throws CustomerException;
 
-    Customer getCustomer(long customerId);
+    Customer getCustomer(Long customerId);
 }
