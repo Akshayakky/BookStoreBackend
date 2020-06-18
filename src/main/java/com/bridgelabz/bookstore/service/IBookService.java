@@ -3,7 +3,6 @@ package com.bridgelabz.bookstore.service;
 import com.bridgelabz.bookstore.dto.BookDto;
 import com.bridgelabz.bookstore.exception.BookStoreException;
 import com.bridgelabz.bookstore.model.Book;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 

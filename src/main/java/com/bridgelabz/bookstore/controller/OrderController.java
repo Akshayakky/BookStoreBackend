@@ -22,8 +22,8 @@ public class OrderController {
      * @return
      */
     @PostMapping
-    public MyOrder addOrder(@RequestBody OrderDTO orderDTO) {
-        return iOrderService.addOrder(orderDTO);
+    public MyOrder addOrder(@RequestParam(value = "user-id") Long userId, @RequestBody OrderDTO orderDTO) {
+        return iOrderService.addOrder(orderDTO, userId);
     }
 
     /**
@@ -34,5 +34,4 @@ public class OrderController {
     public List<MyOrder> getAllOrders(@PathVariable long userId) {
         return iOrderService.getAllOrders(userId);
     }
-
 }

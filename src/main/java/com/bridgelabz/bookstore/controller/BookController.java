@@ -42,8 +42,12 @@ public class BookController {
      * @throws BookStoreException
      */
     @GetMapping("/get-books/{filter}")
-    public List<Book> getBookByFilter(@PathVariable String filter) throws BookStoreException {
-        return bookService.getBookByFilter(filter);
+    public ResponseEntity<List<Book>> getBookByFilter(@PathVariable String filter) {
+        try {
+            return new ResponseEntity<>(bookService.getBookByFilter(filter), HttpStatus.OK);
+        } catch (BookStoreException e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     /**

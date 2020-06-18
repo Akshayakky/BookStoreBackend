@@ -23,7 +23,7 @@ public class OrderServiceImpl implements IOrderService {
      * @return Add order details to database
      */
     @Override
-    public MyOrder addOrder(OrderDTO orderDTO) {
+    public MyOrder addOrder(OrderDTO orderDTO, Long userId) {
         MyOrder myOrder = modelMapper.map(orderDTO, MyOrder.class);
         return orderRepository.save(myOrder);
     }

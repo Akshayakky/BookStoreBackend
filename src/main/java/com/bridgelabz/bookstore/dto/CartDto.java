@@ -1,22 +1,22 @@
 package com.bridgelabz.bookstore.dto;
 
 public class CartDto {
-    private long bookId;
-    private long quantity;
+    private Long bookId;
+    private Long quantity;
 
-    public long getBookId() {
+    public Long getBookId() {
         return bookId;
     }
 
-    public void setBookId(long bookId) {
+    public void setBookId(Long bookId) {
         this.bookId = bookId;
     }
 
-    public long getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(long quantity) {
+    public void setQuantity(Long quantity) {
         this.quantity = quantity;
     }
 }
