@@ -6,5 +6,8 @@ import javax.mail.MessagingException;
 
 public interface IMailService {
 
-    void sendMail(NewUserData newUserData) throws MessagingException;
+    void sendRegisterMail(NewUserData newUserData) throws MessagingException;
+
+    void sendForgetPasswordMail(NewUserData newUserData, String jwt) throws MessagingException;
+
 }

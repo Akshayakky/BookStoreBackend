@@ -2,6 +2,7 @@ package com.bridgelabz.bookstore.model;
 
 public class NewUserData {
     private String email;
+    private String password;
     private String name;
 
     public String getEmail() {
@@ -18,5 +19,13 @@ public class NewUserData {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

@@ -47,7 +47,7 @@ public class BookController {
     }
 
     /**
-     * @param sort
+     * @param sort String Given By User
      * @return Book list by sorting price
      */
     @GetMapping("/sorted/{sort}")
