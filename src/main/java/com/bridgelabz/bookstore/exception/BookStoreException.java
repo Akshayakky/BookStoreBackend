@@ -4,7 +4,7 @@ public class BookStoreException extends Exception {
 
     public ExceptionType type;
 
-    public BookStoreException(ExceptionType Type, String message) {
+    public BookStoreException(ExceptionType type, String message) {
         super(message);
         this.type = type;
     }

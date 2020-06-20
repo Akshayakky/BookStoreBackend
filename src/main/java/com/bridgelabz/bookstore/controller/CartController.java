@@ -34,8 +34,9 @@ public class CartController {
      * @throws CartException
      */
     @PutMapping("/{quantity}")
-    public Cart updateCart(@RequestParam(value = "book_id") Long bookId, @PathVariable Long quantity) throws CartException {
-        return cartService.updateCart(bookId, quantity);
+    public Cart updateCart(@RequestParam(value = "book_id") Long bookId, @PathVariable Long quantity
+            , @RequestParam(value = "user_id") Long userId) throws CartException {
+        return cartService.updateCart(bookId, quantity, userId);
     }
 
     /**
@@ -43,24 +44,25 @@ public class CartController {
      * @throws CartException
      */
     @DeleteMapping("/delete-book/{book-id}")
-    public void removeBookFromCart(@PathVariable(value = "book-id") Long bookId) throws CartException {
-        cartService.removeBookFromCart(bookId);
+    public void removeBookFromCart(@PathVariable(value = "book-id") Long bookId
+            , @RequestParam(value = "user_id") Long userId) throws CartException {
+        cartService.removeBookFromCart(bookId, userId);
     }
 
     /**
      * @return Books List in the cart
      */
     @GetMapping
-    public List<Cart> getListOfBooksInCart() {
-        return cartService.getListOfBooksInCart();
+    public List<Cart> getListOfBooksInCart(@RequestParam(value = "user_id") Long userId) {
+        return cartService.getListOfBooksInCart(userId);
     }
 
     /**
      * Remove all books from cart
      */
     @DeleteMapping("/empty-cart")
-    public void removeAllBooks() {
-        cartService.removeAllBooks();
+    public void removeAllBooks(@RequestParam(value = "user_id") Long userId) {
+        cartService.removeAllBooks(userId);
     }
 }
 

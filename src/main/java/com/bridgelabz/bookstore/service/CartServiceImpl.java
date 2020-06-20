@@ -8,9 +8,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class CartServiceImpl implements ICartService {
 
     @Autowired
@@ -33,8 +35,8 @@ public class CartServiceImpl implements ICartService {
      * @return List of all books present inside the cart
      */
     @Override
-    public List<Cart> getListOfBooksInCart() {
-        return cartRepository.findAll();
+    public List<Cart> getListOfBooksInCart(Long userId) {
+        return cartRepository.findAllByUserIdEquals(userId);
     }
 
     /**
@@ -44,10 +46,10 @@ public class CartServiceImpl implements ICartService {
      * @throws CartException
      */
     @Override
-    public Cart updateCart(Long bookId, Long bookQuantity) throws CartException {
-        Cart cart = cartRepository.findById(bookId).get();
+    public Cart updateCart(Long bookId, Long bookQuantity, Long userId) throws CartException {
+        Cart cart = cartRepository.findByBookIdEqualsAndUserIdEquals(bookId, userId);
         if (cart == null)
-            throw new CartException(CartException.ExceptionType.BOOK_IS_NOT_AVAILABLE, "BOOK_IS_NOT_AVAILABLE");
+            throw new CartException(CartException.ExceptionType.INVALID_BOOK_ID, "INVALID_BOOK_ID");
         cart.setQuantity(bookQuantity);
         return cartRepository.save(cart);
     }
@@ -57,17 +59,18 @@ public class CartServiceImpl implements ICartService {
      * @throws CartException
      */
     @Override
-    public void removeBookFromCart(Long bookId) throws CartException {
-        if (!cartRepository.findById(bookId).isPresent())
+    public void removeBookFromCart(Long bookId, Long userId) throws CartException {
+        Cart cart = cartRepository.findByBookIdEqualsAndUserIdEquals(bookId, userId);
+        if (cart == null)
             throw new CartException(CartException.ExceptionType.INVALID_BOOK_ID, "INVALID_BOOK_ID");
-        cartRepository.deleteById(bookId);
+        cartRepository.deleteById(cart.getCartId());
     }
 
     /**
      * Remove all books inside the cart
      */
     @Override
-    public void removeAllBooks() {
-        cartRepository.deleteAll();
+    public void removeAllBooks(Long userId) {
+        cartRepository.deleteCartByUserIdEquals(userId);
     }
 }

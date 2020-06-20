@@ -4,6 +4,7 @@ import com.bridgelabz.bookstore.dto.BookDto;
 import com.bridgelabz.bookstore.exception.BookStoreException;
 import com.bridgelabz.bookstore.model.Book;
 import com.bridgelabz.bookstore.service.IBookService;
+import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +24,12 @@ public class BookController {
      * @return All books inside database with details
      */
     @GetMapping("/get-books")
-    public List<Book> getBooks() {
-        return bookService.getBookList();
+    public ResponseEntity<List<Book>> getBooks() {
+        try {
+            return new ResponseEntity<>(bookService.getBookList(), HttpStatus.OK);
+        } catch (ExpiredJwtException e) {
+            return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+        }
     }
 
     /**
@@ -62,6 +67,6 @@ public class BookController {
     @PostMapping
     public ResponseEntity<Book> addBook(@RequestBody BookDto bookDto) {
         Book book = bookService.addBook(bookDto);
-        return new ResponseEntity<>(book, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(book, HttpStatus.OK);
     }
 }

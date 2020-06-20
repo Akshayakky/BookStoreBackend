@@ -68,7 +68,7 @@ public class User {
     }
 
     public String getRole() {
-        return "user";
+        return (role != null) ? role : "user";
     }
 
     public void setRole(String role) {
