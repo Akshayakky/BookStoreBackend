@@ -1,11 +1,10 @@
 package com.bridgelabz.bookstore.dto;
 
 public class OrderDTO {
-
     long bookId;
     long totalPrice;
     long bookQuantity;
-    long user;
+    long userId;
     String bookName;
     String userEmail;
     String userName;
@@ -34,12 +33,12 @@ public class OrderDTO {
         this.bookName = bookName;
     }
 
-    public long getUser() {
-        return user;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setUser(long user) {
-        this.user = user;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public long getBookId() {

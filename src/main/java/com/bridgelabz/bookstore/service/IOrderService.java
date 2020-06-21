@@ -6,7 +6,7 @@ import com.bridgelabz.bookstore.model.MyOrder;
 import java.util.List;
 
 public interface IOrderService {
-    MyOrder addOrder(OrderDTO orderDTO, Long userId);
+    MyOrder addOrder(OrderDTO orderDTO);
 
     List<MyOrder> getAllOrders(long userId);
 }

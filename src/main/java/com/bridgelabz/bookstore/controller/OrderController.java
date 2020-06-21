@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
 @CrossOrigin
 @RequestMapping("/order")
@@ -22,8 +21,8 @@ public class OrderController {
      * @return
      */
     @PostMapping
-    public MyOrder addOrder(@RequestParam(value = "user-id") Long userId, @RequestBody OrderDTO orderDTO) {
-        return iOrderService.addOrder(orderDTO, userId);
+    public MyOrder addOrder(@RequestBody OrderDTO orderDTO) {
+        return iOrderService.addOrder(orderDTO);
     }
 
     /**

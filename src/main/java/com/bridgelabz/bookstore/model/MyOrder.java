@@ -1,9 +1,6 @@
 package com.bridgelabz.bookstore.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Entity
@@ -15,14 +12,14 @@ public class MyOrder {
     long bookId;
     long totalPrice;
     long bookQuantity;
-    long user;
+    long userId;
 
-    public long getUser() {
-        return user;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setUser(long user) {
-        this.user = user;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public long getBookQuantity() {

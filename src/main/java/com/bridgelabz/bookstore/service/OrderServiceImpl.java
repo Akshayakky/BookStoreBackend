@@ -4,6 +4,7 @@ import com.bridgelabz.bookstore.dto.OrderDTO;
 import com.bridgelabz.bookstore.model.MyOrder;
 import com.bridgelabz.bookstore.repository.OrderRepository;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,8 @@ public class OrderServiceImpl implements IOrderService {
      * @return Add order details to database
      */
     @Override
-    public MyOrder addOrder(OrderDTO orderDTO, Long userId) {
+    public MyOrder addOrder(OrderDTO orderDTO) {
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         MyOrder myOrder = modelMapper.map(orderDTO, MyOrder.class);
         return orderRepository.save(myOrder);
     }
@@ -34,6 +36,6 @@ public class OrderServiceImpl implements IOrderService {
      */
     @Override
     public List<MyOrder> getAllOrders(long userId) {
-        return orderRepository.findAllByUser(userId);
+        return orderRepository.findAllByUserId(userId);
     }
 }
