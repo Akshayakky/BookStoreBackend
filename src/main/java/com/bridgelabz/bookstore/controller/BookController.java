@@ -4,7 +4,6 @@ import com.bridgelabz.bookstore.dto.BookDto;
 import com.bridgelabz.bookstore.exception.BookStoreException;
 import com.bridgelabz.bookstore.model.Book;
 import com.bridgelabz.bookstore.service.IBookService;
-import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,47 +20,35 @@ public class BookController {
     private IBookService bookService;
 
     /**
-     * @return All books inside database with details
-     */
-    @GetMapping("/get-books")
-    public ResponseEntity<List<Book>> getBooks() {
-        try {
-            return new ResponseEntity<>(bookService.getBookList(), HttpStatus.OK);
-        } catch (ExpiredJwtException e) {
-            return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
-        }
-    }
-
-    /**
      * @param ids
      * @return Book details according to book id
      */
     @GetMapping("/get-books-by-id")
-    public List<Book> getBookById(@RequestParam(value = "ids") Long[] ids) {
-        return bookService.getBookById(ids);
-    }
-
-    /**
-     * @param filter
-     * @return Book by filter search may be it will be author name or book title
-     * @throws BookStoreException
-     */
-    @GetMapping("/get-books/{filter}")
-    public ResponseEntity<List<Book>> getBookByFilter(@PathVariable String filter) {
-        try {
-            return new ResponseEntity<>(bookService.getBookByFilter(filter), HttpStatus.OK);
-        } catch (BookStoreException e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<List<Book>> getBookById(@RequestParam(value = "ids") Long[] ids) {
+        return new ResponseEntity<>(bookService.getBookById(ids), HttpStatus.OK);
     }
 
     /**
      * @param sort String Given By User
      * @return Book list by sorting price
      */
+    @GetMapping("/sorted/{sort}/{filter}")
+    public ResponseEntity<List<Book>> getBookBySortAndSearch(@PathVariable(value = "sort") String sort
+            , @PathVariable String filter) {
+        try {
+            return new ResponseEntity<>(bookService.getBookBySortAndSearch(filter, sort), HttpStatus.OK);
+        } catch (BookStoreException e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping("/sorted/{sort}")
-    public List<Book> getBookBySort(@PathVariable(value = "sort") String sort) {
-        return bookService.getBookBySort(sort);
+    public ResponseEntity<List<Book>> getBookBySort(@PathVariable(value = "sort") String sort) {
+        try {
+            return new ResponseEntity<>(bookService.getBookBySortAndSearch("", sort), HttpStatus.OK);
+        } catch (BookStoreException e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping

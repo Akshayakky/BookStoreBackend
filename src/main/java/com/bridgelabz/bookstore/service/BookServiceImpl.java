@@ -21,14 +21,6 @@ public class BookServiceImpl implements IBookService {
     private ModelMapper modelMapper;
 
     /**
-     * @return All book list with details
-     */
-    @Override
-    public List<Book> getBookList() {
-        return bookRepository.findAll();
-    }
-
-    /**
      * @param id
      * @return Book search by book id
      */
@@ -38,35 +30,27 @@ public class BookServiceImpl implements IBookService {
     }
 
     /**
-     * @param filter
-     * @return Book search by filter may be it will book author or book title
-     * @throws BookStoreException
-     */
-    @Override
-    public List<Book> getBookByFilter(String filter) throws BookStoreException {
-        List<Book> bookList = bookRepository.findBooksByBookAuthorContainsOrBookTitleContains(filter, filter);
-        if (bookList.isEmpty())
-            throw new BookStoreException(BookStoreException.ExceptionType.BOOK_IS_NOT_AVAILABLE, "BOOK_IS_NOT_AVAILABLE");
-        return bookList;
-    }
-
-    /**
      * @param sort
      * @return Book list by sorting it by book price or book quantity
      */
     @Override
-    public List<Book> getBookBySort(String sort) {
+    public List<Book> getBookBySortAndSearch(String filter, String sort) throws BookStoreException {
         List<Book> bookList = null;
         switch (sort) {
             case "increasing":
-                bookList = bookRepository.findByOrderByBookPrice();
+                bookList = bookRepository.findBooksByBookAuthorContainsOrBookTitleContainsOrderByBookPrice(filter, filter);
                 break;
             case "decreasing":
-                bookList = bookRepository.findByOrderByBookPriceDesc();
+                bookList = bookRepository.findBooksByBookAuthorContainsOrBookTitleContainsOrderByBookPriceDesc(filter, filter);
+                break;
+            case "newlyArrived":
+                bookList = bookRepository.findBooksByBookAuthorContainsOrBookTitleContainsOrderByBookQuantity(filter, filter);
                 break;
             default:
-                bookList = bookRepository.findByOrderByBookQuantity();
+                bookList = bookRepository.findBooksByBookAuthorContainsOrBookTitleContainsOrderByBookId(filter, filter);
         }
+        if (bookList.isEmpty())
+            throw new BookStoreException(BookStoreException.ExceptionType.BOOK_IS_NOT_AVAILABLE, "BOOK_IS_NOT_AVAILABLE");
         return bookList;
     }
 
