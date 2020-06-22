@@ -28,12 +28,21 @@ public class MailSenderController {
     @Autowired
     ModelMapper modelMapper;
 
+    /**
+     * @param newUserData - User data to send mail
+     * @return Send mail to user on successful registration
+     * @throws MessagingException
+     */
     @PostMapping("/register")
     public String sendRegisterMail(@RequestBody NewUserData newUserData) throws MessagingException {
         mailService.sendRegisterMail(newUserData);
         return "Mail Sent";
     }
 
+    /**
+     * @param newUserData - User data to send reset password link
+     * @throws Exception
+     */
     @PostMapping("/forget-password")
     public ResponseEntity<?> sendResetPasswordMail(@RequestBody NewUserData newUserData) throws Exception {
         ResponseEntity entity = authenticationController.createAuthenticationToken(new AuthenticationRequest(newUserData.getEmail(), newUserData.getPassword()));
@@ -42,6 +51,12 @@ public class MailSenderController {
         return entity;
     }
 
+    /**
+     * @param userId   - UserId to send order details
+     * @param cartDtos - Ordered book details
+     * @return Send mail to the user on successful order with order details
+     * @throws Exception
+     */
     @PostMapping("/order-confirm")
     public ResponseEntity<?> sendOrderDetailMail(@RequestParam(value = "user-id") Long userId, @RequestBody List<CartDto> cartDtos) throws Exception {
         mailService.sendOrderDetailMail(cartDtos, userId);

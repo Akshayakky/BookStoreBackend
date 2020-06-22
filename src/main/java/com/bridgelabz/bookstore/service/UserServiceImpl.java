@@ -20,7 +20,7 @@ public class UserServiceImpl implements IUserService {
     private ModelMapper modelMapper;
 
     /**
-     * @param userDto
+     * @param userDto - New user details
      * @return Register new user for authentication
      * @throws UserException
      */
@@ -32,11 +32,20 @@ public class UserServiceImpl implements IUserService {
         return userRepository.save(user);
     }
 
+    /**
+     * @param email - Get user details by email
+     * @return User details
+     */
     @Override
     public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
+    /**
+     * @param userDto - Updated user details
+     * @param id      - Id to update user details
+     * @return Updated user details
+     */
     @Override
     public User updateUser(UserDto userDto, Long id) {
         User user = modelMapper.map(userDto, User.class);

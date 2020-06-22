@@ -18,7 +18,7 @@ public class CartController {
     private ICartService cartService;
 
     /**
-     * @param cartDto
+     * @param cartDto - Book details
      * @return Add book to cart for purchase
      */
     @PostMapping
@@ -27,8 +27,8 @@ public class CartController {
     }
 
     /**
-     * @param bookId
-     * @param quantity
+     * @param bookId   - BookId for update book quantity
+     * @param quantity - Updated book quantity
      * @return Update quantity of book of particular book
      * @throws CartException
      */
@@ -39,7 +39,7 @@ public class CartController {
     }
 
     /**
-     * @param bookId
+     * @param bookId - bookId to remove book from cart
      * @throws CartException
      */
     @DeleteMapping("/delete-book/{book-id}")

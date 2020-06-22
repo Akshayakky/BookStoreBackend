@@ -18,7 +18,7 @@ public class CustomerServiceImpl implements ICustomerService {
     private ModelMapper modelMapper;
 
     /**
-     * @param customerDto
+     * @param customerDto - Customer details
      * @return Add customer details to the database
      */
     @Override
@@ -28,9 +28,9 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     /**
-     * @param customerId
-     * @param customerDto
-     * @return
+     * @param customerId  - Id to update customer details
+     * @param customerDto - updated customer details
+     * @return Update customer details of given customer id
      */
     @Override
     public Customer updateCustomer(Long customerId, CustomerDto customerDto) {
@@ -39,6 +39,10 @@ public class CustomerServiceImpl implements ICustomerService {
         return customerRepository.save(customer);
     }
 
+    /**
+     * @param customerId - Id to remove customer details
+     * @throws CustomerException
+     */
     @Override
     public void removeCustomer(Long customerId) throws CustomerException {
         if (customerRepository.findById(customerId).isPresent())
@@ -46,6 +50,10 @@ public class CustomerServiceImpl implements ICustomerService {
         else throw new CustomerException(CustomerException.ExceptionType.CUSTOMER_NOT_FOUND, "CUSTOMER_NOT_FOUND");
     }
 
+    /**
+     * @param customerId - Id to get customer details
+     * @return - Customer details
+     */
     @Override
     public Customer getCustomer(Long customerId) {
         return customerRepository.findById(customerId).get();

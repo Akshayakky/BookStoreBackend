@@ -17,6 +17,11 @@ public class MyUserDetailsService implements UserDetailsService {
     @Autowired
     IUserRepository userRepository;
 
+    /**
+     * @param userName - UserName string pass as email
+     * @return - User status that user is present or not
+     * @throws UsernameNotFoundException - can be thrown if user is not present
+     */
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByEmail(userName);

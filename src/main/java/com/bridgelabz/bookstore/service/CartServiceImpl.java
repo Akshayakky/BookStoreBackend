@@ -22,7 +22,7 @@ public class CartServiceImpl implements ICartService {
     private ModelMapper modelMapper;
 
     /**
-     * @param cartDto
+     * @param cartDto - Book details
      * @return Add books into the cart which is to be purchased
      */
     @Override
@@ -40,8 +40,8 @@ public class CartServiceImpl implements ICartService {
     }
 
     /**
-     * @param bookId
-     * @param bookQuantity
+     * @param bookId - BookId for update book quantity
+     * @param bookQuantity - updated book quantity
      * @return Update book quantity of particular book id
      * @throws CartException
      */

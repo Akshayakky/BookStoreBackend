@@ -20,7 +20,7 @@ public class UserController {
     IUserService userService;
 
     /**
-     * @param userDto
+     * @param userDto - New User Details
      * @return Register new user
      */
     @PostMapping
@@ -33,6 +33,10 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    /**
+     * @param email - Email to get user details
+     * @return User details
+     */
     @GetMapping
     public ResponseEntity<User> getUser(@RequestParam(value = "email") String email) {
         try {
@@ -42,6 +46,12 @@ public class UserController {
         }
     }
 
+    /**
+     * @param userDto - Updated user details
+     * @param id      - Id to update user details
+     * @return Updated user details
+     * @throws UserException
+     */
     @PutMapping
     public ResponseEntity<User> updateUser(@RequestBody UserDto userDto, @RequestParam(value = "id") Long id)
             throws UserException {

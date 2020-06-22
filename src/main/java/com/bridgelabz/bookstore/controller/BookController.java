@@ -20,7 +20,7 @@ public class BookController {
     private IBookService bookService;
 
     /**
-     * @param ids
+     * @param ids - Book ids list
      * @return Book details according to book id
      */
     @GetMapping("/get-books-by-id")
@@ -29,7 +29,7 @@ public class BookController {
     }
 
     /**
-     * @param sort String Given By User
+     * @param sort - String given by user with search filter
      * @return Book list by sorting price
      */
     @GetMapping("/sorted/{sort}/{filter}")
@@ -42,6 +42,10 @@ public class BookController {
         }
     }
 
+    /**
+     * @param sort - String given by user without search filter
+     * @return Book list by sorting price
+     */
     @GetMapping("/sorted/{sort}")
     public ResponseEntity<List<Book>> getBookBySort(@PathVariable(value = "sort") String sort) {
         try {
@@ -51,6 +55,10 @@ public class BookController {
         }
     }
 
+    /**
+     * @param bookDto - New book details
+     * @return New book add to list
+     */
     @PostMapping
     public ResponseEntity<Book> addBook(@RequestBody BookDto bookDto) {
         Book book = bookService.addBook(bookDto);

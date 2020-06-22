@@ -28,6 +28,11 @@ public class AuthenticationController {
     @Autowired
     JwtUtil jwtTokenUtil;
 
+    /**
+     * @param authenticationRequest - UserId and password pass by user
+     * @return - JWT token
+     * @throws Exception - Can be thrown as bad credentials
+     */
     @PostMapping
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
         try {

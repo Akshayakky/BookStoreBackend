@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/order")
+@CrossOrigin
 public class OrderController {
 
     @Autowired
     IOrderService iOrderService;
 
     /**
-     * @param orderDTO
-     * @return
+     * @param orderDTO - Ordered book details
+     * @return - Details of book purchased by user
      */
     @PostMapping
     public MyOrder addOrder(@RequestBody OrderDTO orderDTO) {
@@ -26,7 +26,7 @@ public class OrderController {
     }
 
     /**
-     * @param userId
+     * @param userId - Id to get order of particular user
      * @return All order details of user
      */
     @GetMapping("/{userId}")

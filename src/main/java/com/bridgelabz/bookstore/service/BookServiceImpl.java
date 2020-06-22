@@ -21,8 +21,8 @@ public class BookServiceImpl implements IBookService {
     private ModelMapper modelMapper;
 
     /**
-     * @param id
-     * @return Book search by book id
+     * @param id - Book ids list
+     * @return Book list by book id
      */
     @Override
     public List<Book> getBookById(Long[] id) {
@@ -30,8 +30,8 @@ public class BookServiceImpl implements IBookService {
     }
 
     /**
-     * @param sort
-     * @return Book list by sorting it by book price or book quantity
+     * @param sort - String given by user with search filter
+     * @return Book list by sorting it by book price , book newly arrived with search filter
      */
     @Override
     public List<Book> getBookBySortAndSearch(String filter, String sort) throws BookStoreException {
@@ -54,6 +54,10 @@ public class BookServiceImpl implements IBookService {
         return bookList;
     }
 
+    /**
+     * @param bookDto - New book details given by admin
+     * @return New book add to list
+     */
     @Override
     public Book addBook(BookDto bookDto) {
         Book book = modelMapper.map(bookDto, Book.class);

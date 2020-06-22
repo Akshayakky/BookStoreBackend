@@ -25,6 +25,10 @@ public class MailServiceImpl implements IMailService {
     @Autowired
     private IUserRepository userRepository;
 
+    /**
+     * @param newUserData - User data to send mail on successful user registration
+     * @throws MessagingException
+     */
     @Override
     public void sendRegisterMail(NewUserData newUserData) throws MessagingException {
         MimeMessage message = javaMailSender.createMimeMessage();
@@ -40,6 +44,11 @@ public class MailServiceImpl implements IMailService {
 
     }
 
+    /**
+     * @param newUserData - User data to send reset password link via mail
+     * @param jwt         - JWT token for authentication
+     * @throws MessagingException
+     */
     @Override
     public void sendForgetPasswordMail(NewUserData newUserData, String jwt) throws MessagingException {
         MimeMessage message = javaMailSender.createMimeMessage();
@@ -54,6 +63,11 @@ public class MailServiceImpl implements IMailService {
         javaMailSender.send(message);
     }
 
+    /**
+     * @param cartDtos - Ordered book details
+     * @param userId   - UserId to send mail with ordered book details on successful order
+     * @throws MessagingException
+     */
     @Override
     public void sendOrderDetailMail(List<CartDto> cartDtos, Long userId) throws MessagingException {
         double sum = 0;

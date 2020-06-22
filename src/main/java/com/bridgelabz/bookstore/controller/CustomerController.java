@@ -16,7 +16,7 @@ public class CustomerController {
     private ICustomerService customerService;
 
     /**
-     * @param customerDto
+     * @param customerDto - Shipping details for customer
      * @return Add customer details to the database
      */
     @PostMapping
@@ -25,8 +25,8 @@ public class CustomerController {
     }
 
     /**
-     * @param customerId
-     * @param customerDto
+     * @param customerId  - CustomerId to update
+     * @param customerDto - Updated shipping details
      * @return Update customer details of given customer id
      * @throws CustomerException
      */
@@ -36,7 +36,7 @@ public class CustomerController {
     }
 
     /**
-     * @param customerId
+     * @param customerId - Id to remove customer details
      * @throws CustomerException
      */
     @DeleteMapping("/{customer-id}")

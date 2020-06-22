@@ -20,7 +20,7 @@ public class OrderServiceImpl implements IOrderService {
     OrderRepository orderRepository;
 
     /**
-     * @param orderDTO
+     * @param orderDTO - Ordered book details
      * @return Add order details to database
      */
     @Override
@@ -31,7 +31,7 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     /**
-     * @param userId
+     * @param userId - Id to get order of particular user
      * @return All orders of user
      */
     @Override
