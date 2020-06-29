@@ -1,33 +1,27 @@
 package com.bridgelabz.bookstore.dto;
 
+import com.bridgelabz.bookstore.model.Book;
+import com.bridgelabz.bookstore.model.User;
+
 public class CartDto {
-    private Long userId;
-    private Long bookId;
+    private User user;
+    private Book book;
     private Long quantity;
-    private Long cartId;
 
-    public Long getCartId() {
-        return cartId;
+    public User getUser() {
+        return user;
     }
 
-    public void setCartId(Long cartId) {
-        this.cartId = cartId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Book getBook() {
+        return book;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     public Long getQuantity() {

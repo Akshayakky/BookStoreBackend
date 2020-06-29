@@ -35,7 +35,7 @@ public class CustomerServiceImpl implements ICustomerService {
     @Override
     public Customer updateCustomer(Long customerId, CustomerDto customerDto) {
         Customer customer = modelMapper.map(customerDto, Customer.class);
-        customer.setId(customerId);
+        customer.setCustomerId(customerId);
         return customerRepository.save(customer);
     }
 

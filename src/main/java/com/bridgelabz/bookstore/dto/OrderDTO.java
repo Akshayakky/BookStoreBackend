@@ -1,67 +1,53 @@
 package com.bridgelabz.bookstore.dto;
 
+import com.bridgelabz.bookstore.model.Book;
+import com.bridgelabz.bookstore.model.Customer;
+import com.bridgelabz.bookstore.model.User;
+
 public class OrderDTO {
-    long bookId;
-    long totalPrice;
-    long bookQuantity;
-    long userId;
-    String bookName;
-    String userEmail;
-    String userName;
+    private Book book;
+    private Long totalPrice;
+    private Long bookQuantity;
+    private User user;
+    private Customer customer;
 
-    public String getUserName() {
-        return userName;
+    public Book getBook() {
+        return book;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
-    public String getUserEmail() {
-        return userEmail;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
-
-    public String getBookName() {
-        return bookName;
-    }
-
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public long getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(long bookId) {
-        this.bookId = bookId;
-    }
-
-    public long getTotalPrice() {
+    public Long getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(long totalPrice) {
+    public void setTotalPrice(Long totalPrice) {
         this.totalPrice = totalPrice;
     }
 
-    public long getBookQuantity() {
+    public Long getBookQuantity() {
         return bookQuantity;
     }
 
-    public void setBookQuantity(long bookQuantity) {
+    public void setBookQuantity(Long bookQuantity) {
         this.bookQuantity = bookQuantity;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

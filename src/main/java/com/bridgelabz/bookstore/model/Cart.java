@@ -1,9 +1,6 @@
 package com.bridgelabz.bookstore.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "cart")
@@ -11,33 +8,40 @@ public class Cart {
 
     @Id
     @GeneratedValue
-    private long cartId;
-    private long userId;
-    private long bookId;
+    private long itemId;
+
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
+
     private long quantity;
 
-    public long getCartId() {
-        return cartId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public long getItemId() {
+        return itemId;
     }
 
-    public void setCartId(long cartId) {
-        this.cartId = cartId;
+    public void setItemId(long itemId) {
+        this.itemId = itemId;
     }
 
-    public long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public long getBookId() {
-        return bookId;
+    public Book getBook() {
+        return book;
     }
 
-    public void setBookId(long bookId) {
-        this.bookId = bookId;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     public long getQuantity() {

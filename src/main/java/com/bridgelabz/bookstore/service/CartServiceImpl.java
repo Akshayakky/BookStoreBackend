@@ -3,7 +3,9 @@ package com.bridgelabz.bookstore.service;
 import com.bridgelabz.bookstore.dto.CartDto;
 import com.bridgelabz.bookstore.exception.CartException;
 import com.bridgelabz.bookstore.model.Cart;
+import com.bridgelabz.bookstore.repository.IBookRepository;
 import com.bridgelabz.bookstore.repository.ICartRepository;
+import com.bridgelabz.bookstore.repository.IUserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,12 @@ public class CartServiceImpl implements ICartService {
     private ICartRepository cartRepository;
 
     @Autowired
+    private IBookRepository bookRepository;
+
+    @Autowired
+    private IUserRepository userRepository;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     /**
@@ -32,22 +40,25 @@ public class CartServiceImpl implements ICartService {
     }
 
     /**
+     * @param userId - user Id of user cart belongs to
      * @return List of all books present inside the cart
      */
     @Override
     public List<Cart> getListOfBooksInCart(Long userId) {
-        return cartRepository.findAllByUserIdEquals(userId);
+        return cartRepository.findAllByUserEquals(userRepository.findById(userId).get());
     }
 
     /**
-     * @param bookId - BookId for update book quantity
+     * @param bookId       - Book Id for update book quantity
      * @param bookQuantity - updated book quantity
+     * @param userId       - user Id of user cart belongs to
      * @return Update book quantity of particular book id
      * @throws CartException
      */
     @Override
     public Cart updateCart(Long bookId, Long bookQuantity, Long userId) throws CartException {
-        Cart cart = cartRepository.findByBookIdEqualsAndUserIdEquals(bookId, userId);
+        Cart cart = cartRepository.findByBookEqualsAndUserEquals(bookRepository.findById(bookId).get()
+                , userRepository.findById(userId).get());
         if (cart == null)
             throw new CartException(CartException.ExceptionType.INVALID_BOOK_ID, "INVALID_BOOK_ID");
         cart.setQuantity(bookQuantity);
@@ -55,22 +66,24 @@ public class CartServiceImpl implements ICartService {
     }
 
     /**
-     * @param bookId
+     * @param bookId - Book Id for removing book from cart
+     * @param userId - user Id of user cart belongs to
      * @throws CartException
      */
     @Override
     public void removeBookFromCart(Long bookId, Long userId) throws CartException {
-        Cart cart = cartRepository.findByBookIdEqualsAndUserIdEquals(bookId, userId);
+        Cart cart = cartRepository.findByBookEqualsAndUserEquals(bookRepository.findById(bookId).get()
+                , userRepository.findById(userId).get());
         if (cart == null)
             throw new CartException(CartException.ExceptionType.INVALID_BOOK_ID, "INVALID_BOOK_ID");
-        cartRepository.deleteById(cart.getCartId());
+        cartRepository.deleteById(cart.getItemId());
     }
 
     /**
-     * Remove all books inside the cart
+     * @param userId - user Id of user cart belongs to
      */
     @Override
     public void removeAllBooks(Long userId) {
-        cartRepository.deleteCartByUserIdEquals(userId);
+        cartRepository.deleteCartByUserEquals(userRepository.findById(userId).get());
     }
 }

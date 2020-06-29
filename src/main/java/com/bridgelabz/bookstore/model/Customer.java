@@ -11,21 +11,25 @@ public class Customer {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long customerId;
     private String name;
-    private long pinCode;
+    private Long pinCode;
     private String locality;
     private String address;
     private String city;
     private String landmark;
     private String addressType;
 
-    public long getId() {
-        return id;
+    public Long getCustomerId() {
+        return customerId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
+    }
+
+    public void setPinCode(Long pinCode) {
+        this.pinCode = pinCode;
     }
 
     public String getName() {
@@ -34,14 +38,6 @@ public class Customer {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public long getPinCode() {
-        return pinCode;
-    }
-
-    public void setPinCode(long pinCode) {
-        this.pinCode = pinCode;
     }
 
     public String getLocality() {

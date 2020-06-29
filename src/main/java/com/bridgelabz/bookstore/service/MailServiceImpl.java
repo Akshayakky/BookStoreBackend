@@ -78,7 +78,7 @@ public class MailServiceImpl implements IMailService {
             email.append("<tr bgcolor=\"#33CC99\">");
 
             email.append("<td>");
-            email.append(bookRepository.findById(cartDto.getBookId()).get().getBookTitle());
+            email.append(bookRepository.findById(cartDto.getBook().getBookId()).get().getBookTitle());
             email.append("</td>");
 
             email.append("<td>");
@@ -86,12 +86,12 @@ public class MailServiceImpl implements IMailService {
             email.append("</td>");
 
             email.append("<td>");
-            email.append((bookRepository.findById(cartDto.getBookId()).get().getBookPrice() * cartDto.getQuantity()));
+            email.append((bookRepository.findById(cartDto.getBook().getBookId()).get().getBookPrice() * cartDto.getQuantity()));
             email.append("</td>");
 
             email.append("</tr>");
 
-            sum += bookRepository.findById(cartDto.getBookId()).get().getBookPrice() * cartDto.getQuantity();
+            sum += bookRepository.findById(cartDto.getBook().getBookId()).get().getBookPrice() * cartDto.getQuantity();
         }
         email.append("<tr bgcolor=\"#33CC99\"><td colspan=\"2\"><b>" + "Total   Amount" + "</b></td><td><b>" + sum
                 + "</b></td></tr>");

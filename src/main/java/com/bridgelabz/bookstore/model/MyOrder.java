@@ -8,49 +8,68 @@ import javax.persistence.*;
 public class MyOrder {
     @Id
     @GeneratedValue
-    long orderId;
-    long bookId;
-    long totalPrice;
-    long bookQuantity;
-    long userId;
+    private Long orderId;
 
-    public long getUserId() {
-        return userId;
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
+
+    private Long bookQuantity;
+    private Long totalPrice;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public long getBookQuantity() {
-        return bookQuantity;
-    }
-
-    public void setBookQuantity(long bookQuantity) {
-        this.bookQuantity = bookQuantity;
-    }
-
-    public long getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(long orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
-    public long getBookId() {
-        return bookId;
+    public Book getBook() {
+        return book;
     }
 
-    public void setBookId(long bookId) {
-        this.bookId = bookId;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
-    public long getTotalPrice() {
+    public Long getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(long totalPrice) {
+    public void setTotalPrice(Long totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public Long getBookQuantity() {
+        return bookQuantity;
+    }
+
+    public void setBookQuantity(Long bookQuantity) {
+        this.bookQuantity = bookQuantity;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

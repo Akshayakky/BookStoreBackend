@@ -2,7 +2,8 @@ package com.bridgelabz.bookstore.service;
 
 import com.bridgelabz.bookstore.dto.OrderDTO;
 import com.bridgelabz.bookstore.model.MyOrder;
-import com.bridgelabz.bookstore.repository.OrderRepository;
+import com.bridgelabz.bookstore.repository.IOrderRepository;
+import com.bridgelabz.bookstore.repository.IUserRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,10 @@ public class OrderServiceImpl implements IOrderService {
     ModelMapper modelMapper;
 
     @Autowired
-    OrderRepository orderRepository;
+    IOrderRepository orderRepository;
+
+    @Autowired
+    IUserRepository userRepository;
 
     /**
      * @param orderDTO - Ordered book details
@@ -36,6 +40,6 @@ public class OrderServiceImpl implements IOrderService {
      */
     @Override
     public List<MyOrder> getAllOrders(long userId) {
-        return orderRepository.findAllByUserId(userId);
+        return orderRepository.findAllByUser(userRepository.findById(userId).get());
     }
 }
