@@ -11,5 +11,5 @@ public interface IUserService {
 
     Optional<User> getUserByEmail(String email);
 
-    User updateUser(UserDto userDto, Long id);
+    User updateUser(UserDto userDto, String email);
 }

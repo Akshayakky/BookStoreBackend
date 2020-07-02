@@ -4,6 +4,7 @@ import com.bridgelabz.bookstore.dto.UserDto;
 import com.bridgelabz.bookstore.exception.UserException;
 import com.bridgelabz.bookstore.model.User;
 import com.bridgelabz.bookstore.service.IUserService;
+import com.bridgelabz.bookstore.utility.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,9 @@ public class UserController {
 
     @Autowired
     IUserService userService;
+
+    @Autowired
+    JwtUtil jwtUtil;
 
     /**
      * @param userDto - New User Details
@@ -53,8 +57,8 @@ public class UserController {
      * @throws UserException
      */
     @PutMapping
-    public ResponseEntity<User> updateUser(@RequestBody UserDto userDto, @RequestParam(value = "id") Long id)
+    public ResponseEntity<User> updateUser(@RequestBody UserDto userDto, @RequestHeader("Authorization") String authenticate)
             throws UserException {
-        return new ResponseEntity<>(userService.updateUser(userDto, id), HttpStatus.OK);
+        return new ResponseEntity<>(userService.updateUser(userDto, jwtUtil.extractUsername(authenticate.substring(7))), HttpStatus.OK);
     }
 }

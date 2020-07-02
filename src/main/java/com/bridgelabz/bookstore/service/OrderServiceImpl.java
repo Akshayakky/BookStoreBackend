@@ -28,18 +28,19 @@ public class OrderServiceImpl implements IOrderService {
      * @return Add order details to database
      */
     @Override
-    public MyOrder addOrder(OrderDTO orderDTO) {
+    public MyOrder addOrder(OrderDTO orderDTO, String email) {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        orderDTO.setUser(userRepository.findByEmail(email).get());
         MyOrder myOrder = modelMapper.map(orderDTO, MyOrder.class);
         return orderRepository.save(myOrder);
     }
 
     /**
-     * @param userId - Id to get order of particular user
+     * @param email - user email
      * @return All orders of user
      */
     @Override
-    public List<MyOrder> getAllOrders(long userId) {
-        return orderRepository.findAllByUser(userRepository.findById(userId).get());
+    public List<MyOrder> getAllOrders(String email) {
+        return orderRepository.findAllByUser(userRepository.findByEmail(email).get());
     }
 }

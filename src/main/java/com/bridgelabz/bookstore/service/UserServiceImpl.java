@@ -8,9 +8,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class UserServiceImpl implements IUserService {
 
     @Autowired
@@ -43,13 +45,15 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * @param userDto - Updated user details
-     * @param id      - Id to update user details
+     * @param email   - user email
      * @return Updated user details
      */
     @Override
-    public User updateUser(UserDto userDto, Long id) {
-        User user = modelMapper.map(userDto, User.class);
-        user.setUserId(id);
+    public User updateUser(UserDto userDto, String email) {
+        User user = userRepository.findByEmail(email).get();
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
+        user.setPassword(userDto.getPassword());
         return userRepository.save(user);
     }
 }

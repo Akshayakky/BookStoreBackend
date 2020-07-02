@@ -64,12 +64,12 @@ public class MailServiceImpl implements IMailService {
     }
 
     /**
-     * @param cartDtos - Ordered book details
-     * @param userId   - UserId to send mail with ordered book details on successful order
+     * @param cartDtos  - Ordered book details
+     * @param userEmail - User email to send mail with ordered book details on successful order
      * @throws MessagingException
      */
     @Override
-    public void sendOrderDetailMail(List<CartDto> cartDtos, Long userId) throws MessagingException {
+    public void sendOrderDetailMail(List<CartDto> cartDtos, String userEmail) throws MessagingException {
         double sum = 0;
         StringBuilder email = new StringBuilder();
         email.append("<table style='border:2px solid black'>");
@@ -100,9 +100,9 @@ public class MailServiceImpl implements IMailService {
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setSubject("Order Confirm");
         helper.setFrom("TheBookstore@gmail.com");
-        helper.setTo(userRepository.findById(userId).get().getEmail());
-        helper.setText("<html><body><h3 style='color:darkOrange'>" + "Hello " + userRepository.findById(userId)
-                .get().getFirstName() + " " + userRepository.findById(userId)
+        helper.setTo(userRepository.findByEmail(userEmail).get().getEmail());
+        helper.setText("<html><body><h3 style='color:darkOrange'>" + "Hello " + userRepository.findByEmail(userEmail)
+                .get().getFirstName() + " " + userRepository.findByEmail(userEmail)
                 .get().getLastName() + ",</h3>" +
                 "<h4 style='color:green'>Your Order has been placed successfully!.</h4>" + "Your order Id is #12345.<br></br><br></br>" +
                 "Order Details : " + "<br></br>" +

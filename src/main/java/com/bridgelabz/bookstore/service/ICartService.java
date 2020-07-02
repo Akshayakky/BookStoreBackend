@@ -10,11 +10,11 @@ public interface ICartService {
 
     Cart addBookToCart(CartDto cartDto);
 
-    List<Cart> getListOfBooksInCart(Long userId);
+    List<Cart> getListOfBooksInCart(String email);
 
-    Cart updateCart(Long bookId, Long quantity, Long userId) throws CartException;
+    Cart updateCart(Long bookId, Long quantity, String email) throws CartException;
 
-    void removeBookFromCart(Long bookId, Long userId) throws CartException;
+    void removeBookFromCart(Long bookId, String email) throws CartException;
 
-    void removeAllBooks(Long userId);
+    void removeAllBooks(String email);
 }

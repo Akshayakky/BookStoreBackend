@@ -12,5 +12,5 @@ public interface IMailService {
 
     void sendForgetPasswordMail(NewUserData newUserData, String jwt) throws MessagingException;
 
-    void sendOrderDetailMail(List<CartDto> cartDtos, Long userId) throws MessagingException;
+    void sendOrderDetailMail(List<CartDto> cartDtos, String userEmail) throws MessagingException;
 }

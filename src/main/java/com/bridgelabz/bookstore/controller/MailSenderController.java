@@ -5,6 +5,7 @@ import com.bridgelabz.bookstore.model.AuthenticationRequest;
 import com.bridgelabz.bookstore.model.AuthenticationResponse;
 import com.bridgelabz.bookstore.model.NewUserData;
 import com.bridgelabz.bookstore.service.IMailService;
+import com.bridgelabz.bookstore.utility.JwtUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,9 @@ public class MailSenderController {
 
     @Autowired
     IMailService mailService;
+
+    @Autowired
+    JwtUtil jwtUtil;
 
     @Autowired
     AuthenticationController authenticationController;
@@ -52,14 +56,14 @@ public class MailSenderController {
     }
 
     /**
-     * @param userId   - UserId to send order details
-     * @param cartDtos - Ordered book details
+     * @param authenticate - JWT Token
+     * @param cartDtos     - Ordered book details
      * @return Send mail to the user on successful order with order details
      * @throws Exception
      */
     @PostMapping("/order-confirm")
-    public ResponseEntity<?> sendOrderDetailMail(@RequestParam(value = "user-id") Long userId, @RequestBody List<CartDto> cartDtos) throws Exception {
-        mailService.sendOrderDetailMail(cartDtos, userId);
+    public ResponseEntity<?> sendOrderDetailMail(@RequestHeader("Authorization") String authenticate, @RequestBody List<CartDto> cartDtos) throws Exception {
+        mailService.sendOrderDetailMail(cartDtos, jwtUtil.extractUsername(authenticate.substring(7)));
         return new ResponseEntity("Mail Sent", HttpStatus.OK);
     }
 }
