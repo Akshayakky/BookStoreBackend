@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ICartService {
 
-    Cart addBookToCart(CartDto cartDto);
+    Cart addBookToCart(CartDto cartDto) throws CartException;
 
     List<Cart> getListOfBooksInCart(String email);
 

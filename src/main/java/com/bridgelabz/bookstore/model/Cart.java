@@ -3,7 +3,7 @@ package com.bridgelabz.bookstore.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "cart")
+@Table(name = "cart", uniqueConstraints = @UniqueConstraint(columnNames = {"book_id", "user_id"}))
 public class Cart {
 
     @Id

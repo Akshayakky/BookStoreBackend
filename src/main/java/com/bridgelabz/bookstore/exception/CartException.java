@@ -9,7 +9,7 @@ public class CartException extends Exception {
     }
 
     public enum ExceptionType {
-        BOOK_IS_NOT_AVAILABLE, INVALID_BOOK_ID
+        BOOK_IS_NOT_AVAILABLE, INVALID_BOOK_ID, ALREADY_PRESENT
     }
 
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -34,8 +35,10 @@ public class CartServiceImpl implements ICartService {
      * @return Add books into the cart which is to be purchased
      */
     @Override
-    public Cart addBookToCart(CartDto cartDto) {
+    public Cart addBookToCart(CartDto cartDto) throws CartException {
         Cart cart = modelMapper.map(cartDto, Cart.class);
+        if (cartRepository.findByBookEqualsAndUserEquals(cartDto.getBook(), cartDto.getUser()).isPresent())
+            throw new CartException(CartException.ExceptionType.ALREADY_PRESENT, "Book Already Present");
         return cartRepository.save(cart);
     }
 
@@ -57,10 +60,9 @@ public class CartServiceImpl implements ICartService {
      */
     @Override
     public Cart updateCart(Long bookId, Long bookQuantity, String email) throws CartException {
-        Cart cart = cartRepository.findByBookEqualsAndUserEquals(bookRepository.findById(bookId).get()
+        Optional<Cart> carts = cartRepository.findByBookEqualsAndUserEquals(bookRepository.findById(bookId).get()
                 , userRepository.findByEmail(email).get());
-        if (cart == null)
-            throw new CartException(CartException.ExceptionType.INVALID_BOOK_ID, "INVALID_BOOK_ID");
+        Cart cart = carts.orElseThrow(() -> new CartException(CartException.ExceptionType.INVALID_BOOK_ID, "INVALID_BOOK_ID"));
         cart.setQuantity(bookQuantity);
         return cartRepository.save(cart);
     }
@@ -72,10 +74,9 @@ public class CartServiceImpl implements ICartService {
      */
     @Override
     public void removeBookFromCart(Long bookId, String email) throws CartException {
-        Cart cart = cartRepository.findByBookEqualsAndUserEquals(bookRepository.findById(bookId).get()
+        Optional<Cart> carts = cartRepository.findByBookEqualsAndUserEquals(bookRepository.findById(bookId).get()
                 , userRepository.findByEmail(email).get());
-        if (cart == null)
-            throw new CartException(CartException.ExceptionType.INVALID_BOOK_ID, "INVALID_BOOK_ID");
+        Cart cart = carts.orElseThrow(() -> new CartException(CartException.ExceptionType.INVALID_BOOK_ID, "INVALID_BOOK_ID"));
         cartRepository.deleteById(cart.getItemId());
     }
 
