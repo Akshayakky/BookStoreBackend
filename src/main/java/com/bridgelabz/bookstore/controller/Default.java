@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping
 @CrossOrigin
 public class Default {
-    @GetMapping("/")
+    @RequestMapping("/")
     public String getMessage() {
         return "Hello";
     }
