@@ -3,12 +3,14 @@ package com.bridgelabz.bookstore.controller;
 import com.bridgelabz.bookstore.dto.BookDto;
 import com.bridgelabz.bookstore.exception.BookStoreException;
 import com.bridgelabz.bookstore.model.Book;
+import com.bridgelabz.bookstore.repository.IBookRepository;
 import com.bridgelabz.bookstore.service.IBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,6 +21,9 @@ public class BookController {
     @Autowired
     private IBookService bookService;
 
+    @Autowired
+    private IBookRepository bookRepository;
+
     /**
      * @param ids - Book ids list
      * @return Book details according to book id
@@ -26,6 +31,13 @@ public class BookController {
     @GetMapping("/get-books-by-id")
     public ResponseEntity<List<Book>> getBookById(@RequestParam(value = "ids") Long[] ids) {
         return new ResponseEntity<>(bookService.getBookById(ids), HttpStatus.OK);
+    }
+
+    @GetMapping("/get-books")
+    public ResponseEntity<List<Book>> getBook(@RequestParam(value = "ids") Long[] ids) {
+        List<Book> list = new ArrayList<>();
+        bookRepository.findAll().forEach(list::add);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     /**
