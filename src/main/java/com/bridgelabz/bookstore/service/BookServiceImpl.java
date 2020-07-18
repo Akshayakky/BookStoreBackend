@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,7 +27,9 @@ public class BookServiceImpl implements IBookService {
      */
     @Override
     public List<Book> getBookById(Long[] id) {
-        return bookRepository.findAllById(Arrays.asList(id));
+        List<Book> list = new ArrayList<>();
+        bookRepository.findAllById(Arrays.asList(id)).forEach(list::add);
+        return list;
     }
 
     /**
