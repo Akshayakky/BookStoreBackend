@@ -14,7 +14,6 @@ public class Book {
     private String bookImage;
     private int bookQuantity;
     private double bookPrice;
-    @Lob
     private String bookDescription;
 
     public Book() {
