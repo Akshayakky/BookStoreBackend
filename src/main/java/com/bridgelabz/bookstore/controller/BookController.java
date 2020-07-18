@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -31,13 +30,6 @@ public class BookController {
     @GetMapping("/get-books-by-id")
     public ResponseEntity<List<Book>> getBookById(@RequestParam(value = "ids") Long[] ids) {
         return new ResponseEntity<>(bookService.getBookById(ids), HttpStatus.OK);
-    }
-
-    @GetMapping("/get-books")
-    public ResponseEntity<List<Book>> getBook(@RequestParam(value = "ids") Long[] ids) {
-        List<Book> list = new ArrayList<>();
-        bookRepository.findAll().forEach(list::add);
-        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     /**
