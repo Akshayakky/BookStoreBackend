@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
@@ -48,6 +49,12 @@ public class UserController {
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
+    }
+
+
+    @GetMapping
+    public ResponseEntity<List<User>> getAllUser() {
+        return new ResponseEntity<>(userService.getAllUser(), HttpStatus.NOT_FOUND);
     }
 
     /**

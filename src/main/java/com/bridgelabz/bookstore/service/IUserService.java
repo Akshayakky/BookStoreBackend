@@ -4,6 +4,7 @@ import com.bridgelabz.bookstore.dto.UserDto;
 import com.bridgelabz.bookstore.exception.UserException;
 import com.bridgelabz.bookstore.model.User;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface IUserService {
@@ -12,4 +13,6 @@ public interface IUserService {
     Optional<User> getUserByEmail(String email);
 
     User updateUser(UserDto userDto, String email);
+
+    List<User> getAllUser();
 }
