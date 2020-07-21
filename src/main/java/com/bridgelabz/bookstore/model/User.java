@@ -3,7 +3,7 @@ package com.bridgelabz.bookstore.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user")
+@Table(name = "client")
 public class User {
     public boolean active;
 
