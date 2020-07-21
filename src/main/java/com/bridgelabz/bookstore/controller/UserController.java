@@ -52,7 +52,7 @@ public class UserController {
     }
 
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<User>> getAllUser() {
         return new ResponseEntity<>(userService.getAllUser(), HttpStatus.NOT_FOUND);
     }
