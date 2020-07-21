@@ -16,6 +16,18 @@ public class Book {
     private double bookPrice;
     private String bookDescription;
 
+    public Book() {
+    }
+
+    public Book(String bookAuthor, String bookTitle, String bookImage, int bookQuantity, double bookPrice, String bookDescription) {
+        this.bookAuthor = bookAuthor;
+        this.bookTitle = bookTitle;
+        this.bookImage = bookImage;
+        this.bookQuantity = bookQuantity;
+        this.bookPrice = bookPrice;
+        this.bookDescription = bookDescription;
+    }
+
     public long getBookId() {
         return bookId;
     }
