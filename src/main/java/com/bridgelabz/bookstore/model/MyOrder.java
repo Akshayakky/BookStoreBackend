@@ -1,6 +1,7 @@
 package com.bridgelabz.bookstore.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 
 @Entity
@@ -16,6 +17,7 @@ public class MyOrder {
 
     private Long bookQuantity;
     private Long totalPrice;
+    private LocalDate date;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -24,6 +26,14 @@ public class MyOrder {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
 
     public Customer getCustomer() {
         return customer;

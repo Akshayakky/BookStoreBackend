@@ -9,6 +9,7 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -31,6 +32,7 @@ public class OrderServiceImpl implements IOrderService {
     public MyOrder addOrder(OrderDTO orderDTO, String email) {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         orderDTO.setUser(userRepository.findByEmail(email).get());
+        orderDTO.setDate(LocalDate.now());
         MyOrder myOrder = modelMapper.map(orderDTO, MyOrder.class);
         return orderRepository.save(myOrder);
     }
