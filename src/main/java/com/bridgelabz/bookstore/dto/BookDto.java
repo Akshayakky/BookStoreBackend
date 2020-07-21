@@ -1,7 +1,5 @@
 package com.bridgelabz.bookstore.dto;
 
-import javax.persistence.Lob;
-
 public class BookDto {
 
     private String bookAuthor;
@@ -9,7 +7,6 @@ public class BookDto {
     private String bookImage;
     private long bookQuantity;
     private long bookPrice;
-    @Lob
     private String bookDescription;
 
     public String getBookAuthor() {
