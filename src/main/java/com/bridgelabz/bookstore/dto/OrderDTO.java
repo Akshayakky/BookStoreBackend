@@ -4,12 +4,23 @@ import com.bridgelabz.bookstore.model.Book;
 import com.bridgelabz.bookstore.model.Customer;
 import com.bridgelabz.bookstore.model.User;
 
+import java.time.LocalDate;
+
 public class OrderDTO {
     private Book book;
     private Long totalPrice;
     private Long bookQuantity;
     private User user;
     private Customer customer;
+    private LocalDate date;
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
 
     public Book getBook() {
         return book;

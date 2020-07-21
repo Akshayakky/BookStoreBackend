@@ -1,7 +1,9 @@
 package com.bridgelabz.bookstore;
 
 import com.bridgelabz.bookstore.model.Book;
+import com.bridgelabz.bookstore.model.User;
 import com.bridgelabz.bookstore.repository.IBookRepository;
+import com.bridgelabz.bookstore.repository.IUserRepository;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,10 +17,12 @@ public class BookstoreApplication {
     }
 
     @Bean
-    ApplicationRunner applicationRunner(IBookRepository bookRepository) {
+    ApplicationRunner applicationRunner(IBookRepository bookRepository, IUserRepository userRepository) {
         return args -> {
-            if (!bookRepository.findAll().iterator().hasNext()) {
-                bookRepository.save(new Book("Chetan Bhagat", "Girl In Room 105 1", "https://elearningindustry.com/wp-content/uploads/2016/05/top-10-books-every-college-student-read-e1464023124869.jpeg", 4, 230, "new book"));
+            if (!userRepository.findAll().isEmpty()) {
+                userRepository.save(new User(true, "Admin", "", "akshaysmpt01@gmail.com", "admin123", "admin"));
+            }
+            if (bookRepository.findAll().isEmpty()) {
                 bookRepository.save(new Book("Chetan Bhagat", "The Girl in Room 105", "http://books.google.com/books/content?id=GHt_uwEACAAJ&printsec=frontcover&img=1&zoom=5", 12, 193.0, "Hi I'm Keshavand my life is screwed. I hate my job and my girlfriend left me. Ahthe beautiful Zara. Zara is from Kashmir. She is a Muslim. And did I tell you my family is a bitwelltraditional? Anywayleave that. Zara and I broke up four years ago. She moved on in life. I didn''t. I drank every night to forget her. I calledmessagedand stalked her on social media. She just ignored me. Howeverthat nighton the eve of her birthdayZara messaged me. She called me overlike old timesto her hostel room 105. I shouldn''t have gonebut I did... and my life changed forever. This is not a love story. It is an unlove story.From the author of Five Point Someone and 2 Statescomes a fast-pacedfunny and unputdownable thriller about obsessive love and finding purpose in life against the backdrop of contemporary India."));
                 bookRepository.save(new Book("Rujuta Divekar", "Indian Superfoods", "http://books.google.com/books/content?id=4oFoDwAAQBAJ&printsec=frontcover&img=1&zoom=5", 13, 495.0, "Forget about acacia seeds and goji berries. The secret foods for healthvitality and weight loss lie in our own kitchens and backyards. Top nutritionist Rujuta Diwekar talks you through the ten Indian superfoods that will completely transform you"));
                 bookRepository.save(new Book("Dan Brown", "Angels And Demons", "http://books.google.com/books/content?id=d5xgYw4Ts0gC&printsec=frontcover&img=1&zoom=5", 14, 218.0, "*INCLUDES A SNEAK PREVIEW OF ORIGINTHE NEW THRILLER BY DAN BROWN: OUT 3RD OCTOBER. PRE-ORDER TODAY* --------------------------------------------------------------------------------------------------- CERN InstituteSwitzerland: a world-renowned scientist is found brutally murdered with a mysterious symbol seared onto his chest. The VaticanRome: the College of Cardinals assembles to elect a new pope. Somewhere beneath theman unstoppable bomb of terrifying power relentlessly counts down to oblivion. In a breathtaking race against timeHarvard professor Robert Langdon must decipher a labyrinthine trail of ancient symbols if he is to defeat those responsible - the Illuminatia secret brotherhood presumed extinct for nearly four hundred yearsreborn to continue their deadly vendetta against their most hated enemythe Catholic Church."));
