@@ -14,7 +14,7 @@ public class Book {
     private String bookImage;
     private int bookQuantity;
     private double bookPrice;
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String bookDescription;
 
     public Book() {
