@@ -19,7 +19,7 @@ public class BookstoreApplication {
     @Bean
     ApplicationRunner applicationRunner(IBookRepository bookRepository, IUserRepository userRepository) {
         return args -> {
-            if (!userRepository.findAll().isEmpty()) {
+            if (userRepository.findAll().isEmpty()) {
                 userRepository.save(new User(true, "Admin", "", "akshaysmpt01@gmail.com", "admin123", "admin"));
             }
             if (bookRepository.findAll().isEmpty()) {
