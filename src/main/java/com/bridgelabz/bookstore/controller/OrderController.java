@@ -34,7 +34,15 @@ public class OrderController {
      * @return All order details of user
      */
     @GetMapping
-    public List<MyOrder> getAllOrders(@RequestHeader("Authorization") String authenticate) {
-        return iOrderService.getAllOrders(jwtUtil.extractUsername(authenticate.substring(7)));
+    public List<MyOrder> getUserOrders(@RequestHeader("Authorization") String authenticate) {
+        return iOrderService.getUserOrders(jwtUtil.extractUsername(authenticate.substring(7)));
+    }
+
+    /**
+     * @return All order
+     */
+    @GetMapping("/all")
+    public List<MyOrder> getAllOrders() {
+        return iOrderService.getAllOrders();
     }
 }

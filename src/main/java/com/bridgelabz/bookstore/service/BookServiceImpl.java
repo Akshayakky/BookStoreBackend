@@ -38,16 +38,16 @@ public class BookServiceImpl implements IBookService {
         List<Book> bookList = null;
         switch (sort) {
             case "increasing":
-                bookList = bookRepository.findBooksByBookAuthorContainsOrBookTitleContainsOrderByBookPrice(filter, filter);
+                bookList = bookRepository.findBooksByBookAuthorContainsIgnoreCaseOrBookTitleContainsIgnoreCaseOrderByBookPrice(filter, filter);
                 break;
             case "decreasing":
-                bookList = bookRepository.findBooksByBookAuthorContainsOrBookTitleContainsOrderByBookPriceDesc(filter, filter);
+                bookList = bookRepository.findBooksByBookAuthorContainsIgnoreCaseOrBookTitleContainsIgnoreCaseOrderByBookPriceDesc(filter, filter);
                 break;
             case "newlyArrived":
-                bookList = bookRepository.findBooksByBookAuthorContainsOrBookTitleContainsOrderByBookQuantity(filter, filter);
+                bookList = bookRepository.findBooksByBookAuthorContainsIgnoreCaseOrBookTitleContainsIgnoreCaseOrderByBookQuantity(filter, filter);
                 break;
             default:
-                bookList = bookRepository.findBooksByBookAuthorContainsOrBookTitleContainsOrderByBookId(filter, filter);
+                bookList = bookRepository.findBooksByBookAuthorContainsIgnoreCaseOrBookTitleContainsIgnoreCaseOrderByBookId(filter, filter);
         }
         if (bookList.isEmpty())
             throw new BookStoreException(BookStoreException.ExceptionType.BOOK_IS_NOT_AVAILABLE, "BOOK_IS_NOT_AVAILABLE");

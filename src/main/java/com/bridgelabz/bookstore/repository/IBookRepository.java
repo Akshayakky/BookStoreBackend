@@ -9,13 +9,13 @@ import java.util.List;
 @Repository
 public interface IBookRepository extends JpaRepository<Book, Long> {
 
-    List<Book> findBooksByBookAuthorContainsOrBookTitleContainsOrderByBookPriceDesc(String bookAuthor, String bookTitle);
+    List<Book> findBooksByBookAuthorContainsIgnoreCaseOrBookTitleContainsIgnoreCaseOrderByBookPriceDesc(String bookAuthor, String bookTitle);
 
-    List<Book> findBooksByBookAuthorContainsOrBookTitleContainsOrderByBookQuantity(String bookAuthor, String bookTitle);
+    List<Book> findBooksByBookAuthorContainsIgnoreCaseOrBookTitleContainsIgnoreCaseOrderByBookQuantity(String bookAuthor, String bookTitle);
 
-    List<Book> findBooksByBookAuthorContainsOrBookTitleContainsOrderByBookPrice(String bookAuthor, String bookTitle);
+    List<Book> findBooksByBookAuthorContainsIgnoreCaseOrBookTitleContainsIgnoreCaseOrderByBookPrice(String bookAuthor, String bookTitle);
 
-    List<Book> findBooksByBookAuthorContainsOrBookTitleContainsOrderByBookId(String bookAuthor, String bookTitle);
+    List<Book> findBooksByBookAuthorContainsIgnoreCaseOrBookTitleContainsIgnoreCaseOrderByBookId(String bookAuthor, String bookTitle);
 
     List<Book> findBooksByBookAuthorContainsOrBookTitleContains(String bookAuthor, String bookTitle);
 }

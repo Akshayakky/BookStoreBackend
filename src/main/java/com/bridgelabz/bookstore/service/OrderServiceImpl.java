@@ -42,7 +42,16 @@ public class OrderServiceImpl implements IOrderService {
      * @return All orders of user
      */
     @Override
-    public List<MyOrder> getAllOrders(String email) {
+    public List<MyOrder> getUserOrders(String email) {
         return orderRepository.findAllByUser(userRepository.findByEmail(email).get());
+    }
+
+
+    /**
+     * @return All orders
+     */
+    @Override
+    public List<MyOrder> getAllOrders() {
+        return orderRepository.findAll();
     }
 }
