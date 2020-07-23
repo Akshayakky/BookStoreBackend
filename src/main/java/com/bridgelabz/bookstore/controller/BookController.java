@@ -64,14 +64,4 @@ public class BookController {
         Book book = bookService.addBook(bookDto);
         return new ResponseEntity<>(book, HttpStatus.OK);
     }
-
-    /**
-     * @param bookId - Book Id Of book to be removed
-     * @return Removed Message
-     */
-    @DeleteMapping("/{book-id}")
-    public ResponseEntity<String> deleteBook(@PathVariable(value="book-id") Long bookId) {
-        bookService.removeBook(bookId);
-        return new ResponseEntity<>("Book Removed Successfully", HttpStatus.OK);
-    }
 }

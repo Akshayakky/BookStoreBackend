@@ -12,6 +12,4 @@ public interface IBookService {
     List<Book> getBookBySortAndSearch(String filter, String sort) throws BookStoreException;
 
     Book addBook(BookDto bookDto);
-
-    void removeBook(Long bookId);
 }
