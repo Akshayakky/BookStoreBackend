@@ -63,5 +63,14 @@ public class BookServiceImpl implements IBookService {
         Book book = modelMapper.map(bookDto, Book.class);
         return bookRepository.save(book);
     }
+
+    /**
+     * @param bookId - book Id of book to be removed
+     * @return removed book
+     */
+    @Override
+    public void removeBook(Long bookId) {
+        bookRepository.deleteById(bookId);
+    }
 }
 
