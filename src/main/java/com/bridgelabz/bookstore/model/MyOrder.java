@@ -3,6 +3,7 @@ package com.bridgelabz.bookstore.model;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+
 @Entity
 @Table
 public class MyOrder {

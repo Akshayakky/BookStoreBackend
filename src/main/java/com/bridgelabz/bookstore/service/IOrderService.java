@@ -8,5 +8,7 @@ import java.util.List;
 public interface IOrderService {
     MyOrder addOrder(OrderDTO orderDTO, String email);
 
-    List<MyOrder> getAllOrders(String email);
+    List<MyOrder> getUserOrders(String email);
+
+    List<MyOrder> getAllOrders();
 }
