@@ -99,7 +99,6 @@ public class MailServiceImpl implements IMailService {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setSubject("Order Confirm");
-        helper.setFrom("TheBookstore@gmail.com");
         helper.setTo(userRepository.findByEmail(userEmail).get().getEmail());
         helper.setText("<html><body><h3 style='color:darkOrange'>" + "Hello " + userRepository.findByEmail(userEmail)
                 .get().getFirstName() + " " + userRepository.findByEmail(userEmail)
