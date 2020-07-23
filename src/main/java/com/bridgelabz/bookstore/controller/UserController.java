@@ -58,8 +58,8 @@ public class UserController {
     }
 
     /**
-     * @param userDto - Updated user details
-     * @param id      - Id to update user details
+     * @param userDto      - Updated user details
+     * @param authenticate - jwt
      * @return Updated user details
      * @throws UserException
      */
