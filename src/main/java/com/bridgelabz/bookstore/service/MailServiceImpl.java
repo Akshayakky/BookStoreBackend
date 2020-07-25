@@ -57,7 +57,7 @@ public class MailServiceImpl implements IMailService {
         helper.setTo(newUserData.getEmail());
         helper.setText("Dear " + newUserData.getName() + ",\n" +
                 "Click on the below link to reset Your password.\n" +
-                "https://d-bookstore.herokuapp.com/reset-password/" + jwt + "\n" +
+                "https://thee-bookstore.herokuapp.com/reset-password/" + jwt + "\n" +
                 "Regards ,\n" +
                 "The Bookstore Team", false);
         javaMailSender.send(message);
