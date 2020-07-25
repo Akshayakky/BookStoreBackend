@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface ICartRepository extends JpaRepository<Cart, Long> {
-    List<Cart> findAllByUserEquals(User user);
+    List<Cart> findAllByUserEqualsOrderByBook(User user);
 
     Optional<Cart> findByBookEqualsAndUserEquals(Book book, User user);
 

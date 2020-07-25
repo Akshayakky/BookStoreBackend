@@ -48,7 +48,7 @@ public class CartServiceImpl implements ICartService {
      */
     @Override
     public List<Cart> getListOfBooksInCart(String email) {
-        return cartRepository.findAllByUserEquals(userRepository.findByEmail(email).get());
+        return cartRepository.findAllByUserEqualsOrderByBook(userRepository.findByEmail(email).get());
     }
 
     /**
