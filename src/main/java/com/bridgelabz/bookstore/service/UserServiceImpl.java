@@ -51,12 +51,12 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User updateUser(UserDto userDto, String email) {
         User user = userRepository.findByEmail(email).get();
-        if(userDto.getFirstName() != null)
-        user.setFirstName(userDto.getFirstName());
-        if(userDto.getLastName() != null)
-        user.setLastName(userDto.getLastName());
-        if(userDto.getPassword() != null)
-        user.setPassword(userDto.getPassword());
+        if (userDto.getFirstName() != null)
+            user.setFirstName(userDto.getFirstName());
+        if (userDto.getLastName() != null)
+            user.setLastName(userDto.getLastName());
+        if (userDto.getPassword() != null)
+            user.setPassword(userDto.getPassword());
         return userRepository.save(user);
     }
 }
