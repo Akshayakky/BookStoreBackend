@@ -1,15 +1,14 @@
 package com.bridgelabz.bookstore.controller;
 
 import com.bridgelabz.bookstore.dto.CartDto;
-import com.bridgelabz.bookstore.model.AuthenticationRequest;
-import com.bridgelabz.bookstore.model.AuthenticationResponse;
-import com.bridgelabz.bookstore.model.NewUserData;
+import com.bridgelabz.bookstore.dto.UserDto;
 import com.bridgelabz.bookstore.service.IMailService;
+import com.bridgelabz.bookstore.service.MyUserDetailsService;
 import com.bridgelabz.bookstore.utility.JwtUtil;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
@@ -27,31 +26,32 @@ public class MailSenderController {
     JwtUtil jwtUtil;
 
     @Autowired
-    AuthenticationController authenticationController;
+    MyUserDetailsService userDetailsService;
 
     @Autowired
-    ModelMapper modelMapper;
+    JwtUtil jwtTokenUtil;
 
     /**
-     * @param newUserData - User data to send mail
+     * @param userDto - User data to send mail
      * @return Send mail to user on successful registration
      * @throws MessagingException
      */
     @PostMapping("/register")
-    public String sendRegisterMail(@RequestBody NewUserData newUserData) throws MessagingException {
-        mailService.sendRegisterMail(newUserData);
+    public String sendRegisterMail(@RequestBody UserDto userDto) throws MessagingException {
+        mailService.sendRegisterMail(userDto);
         return "Mail Sent";
     }
 
     /**
-     * @param newUserData - User data to send reset password link
+     * @param email - User email to send reset password link
+     * @return jwt
      * @throws Exception
      */
     @PostMapping("/forget-password")
-    public ResponseEntity<?> sendResetPasswordMail(@RequestBody NewUserData newUserData) throws Exception {
-        ResponseEntity entity = authenticationController.createAuthenticationToken(new AuthenticationRequest(newUserData.getEmail(), newUserData.getPassword()));
-        AuthenticationResponse response = modelMapper.map(entity.getBody(), AuthenticationResponse.class);
-        mailService.sendForgetPasswordMail(newUserData, response.getJwt());
+    public ResponseEntity<?> sendResetPasswordMail(@RequestParam(value = "email") String email) throws Exception {
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+        ResponseEntity entity = ResponseEntity.ok(jwtTokenUtil.generateToken(userDetails));
+        mailService.sendForgetPasswordMail(email, jwtTokenUtil.generateToken(userDetails));
         return entity;
     }
 
