@@ -1,7 +1,7 @@
 package com.bridgelabz.bookstore.service;
 
 import com.bridgelabz.bookstore.dto.CartDto;
-import com.bridgelabz.bookstore.model.NewUserData;
+import com.bridgelabz.bookstore.dto.UserDto;
 import com.bridgelabz.bookstore.repository.IBookRepository;
 import com.bridgelabz.bookstore.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,16 +26,16 @@ public class MailServiceImpl implements IMailService {
     private IUserRepository userRepository;
 
     /**
-     * @param newUserData - User data to send mail on successful user registration
+     * @param user - User data to send mail on successful user registration
      * @throws MessagingException
      */
     @Override
-    public void sendRegisterMail(NewUserData newUserData) throws MessagingException {
+    public void sendRegisterMail(UserDto userDto) throws MessagingException {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setSubject("Thank you for registering");
-        helper.setTo(newUserData.getEmail());
-        helper.setText("Dear " + newUserData.getName() + ",\n" +
+        helper.setTo(userDto.getEmail());
+        helper.setText("Dear " + userDto.getFirstName() + ",\n" +
                 "\n" +
                 "Thank you for your registration. If you have any questions, please let me know!.\n" +
                 "\n" +
@@ -45,19 +45,19 @@ public class MailServiceImpl implements IMailService {
     }
 
     /**
-     * @param newUserData - User data to send reset password link via mail
-     * @param jwt         - JWT token for authentication
+     * @param email - email of user to send reset password link
+     * @param jwt   - JWT token for authentication
      * @throws MessagingException
      */
     @Override
-    public void sendForgetPasswordMail(NewUserData newUserData, String jwt) throws MessagingException {
+    public void sendForgetPasswordMail(String email, String jwt) throws MessagingException {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setSubject("Reset Password Link");
-        helper.setTo(newUserData.getEmail());
-        helper.setText("Dear " + newUserData.getName() + ",\n" +
+        helper.setTo(email);
+        helper.setText("Dear " + userRepository.findByEmail(email).get().getFirstName() + ",\n" +
                 "Click on the below link to reset Your password.\n" +
-                "https://thee-bookstore.herokuapp.com/reset-password/" + jwt + "\n" +
+                "http://localhost:3000/reset-password/" + jwt + "\n" +
                 "Regards ,\n" +
                 "The Bookstore Team", false);
         javaMailSender.send(message);
@@ -99,6 +99,7 @@ public class MailServiceImpl implements IMailService {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setSubject("Order Confirm");
+        helper.setFrom("TheBookstore@gmail.com");
         helper.setTo(userRepository.findByEmail(userEmail).get().getEmail());
         helper.setText("<html><body><h3 style='color:darkOrange'>" + "Hello " + userRepository.findByEmail(userEmail)
                 .get().getFirstName() + " " + userRepository.findByEmail(userEmail)

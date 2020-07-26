@@ -1,16 +1,16 @@
 package com.bridgelabz.bookstore.service;
 
 import com.bridgelabz.bookstore.dto.CartDto;
-import com.bridgelabz.bookstore.model.NewUserData;
+import com.bridgelabz.bookstore.dto.UserDto;
 
 import javax.mail.MessagingException;
 import java.util.List;
 
 public interface IMailService {
 
-    void sendRegisterMail(NewUserData newUserData) throws MessagingException;
+    void sendRegisterMail(UserDto userDto) throws MessagingException;
 
-    void sendForgetPasswordMail(NewUserData newUserData, String jwt) throws MessagingException;
+    void sendForgetPasswordMail(String email, String jwt) throws MessagingException;
 
     void sendOrderDetailMail(List<CartDto> cartDtos, String userEmail) throws MessagingException;
 }
