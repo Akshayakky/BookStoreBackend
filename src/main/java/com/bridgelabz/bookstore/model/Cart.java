@@ -20,6 +20,15 @@ public class Cart {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public Cart(Book book, long quantity, User user) {
+        this.book = book;
+        this.quantity = quantity;
+        this.user = user;
+    }
+
+    public Cart() {
+    }
+
     public long getItemId() {
         return itemId;
     }

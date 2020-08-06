@@ -16,6 +16,4 @@ public interface IBookRepository extends JpaRepository<Book, Long> {
     List<Book> findBooksByBookAuthorContainsIgnoreCaseOrBookTitleContainsIgnoreCaseOrderByBookPrice(String bookAuthor, String bookTitle);
 
     List<Book> findBooksByBookAuthorContainsIgnoreCaseOrBookTitleContainsIgnoreCaseOrderByBookId(String bookAuthor, String bookTitle);
-
-    List<Book> findBooksByBookAuthorContainsOrBookTitleContains(String bookAuthor, String bookTitle);
 }

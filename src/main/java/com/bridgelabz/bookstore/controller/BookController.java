@@ -61,6 +61,7 @@ public class BookController {
      */
     @PostMapping
     public ResponseEntity<Book> addBook(@RequestBody BookDto bookDto) {
+        System.out.println(bookDto);
         Book book = bookService.addBook(bookDto);
         return new ResponseEntity<>(book, HttpStatus.OK);
     }

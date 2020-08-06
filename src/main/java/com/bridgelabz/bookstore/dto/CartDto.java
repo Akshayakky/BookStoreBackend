@@ -8,6 +8,15 @@ public class CartDto {
     private Book book;
     private Long quantity;
 
+    public CartDto(User user, Book book, Long quantity) {
+        this.user = user;
+        this.book = book;
+        this.quantity = quantity;
+    }
+
+    public CartDto() {
+    }
+
     public User getUser() {
         return user;
     }
